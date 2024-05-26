@@ -35,7 +35,7 @@ var client = new RestClient(options);
 
 ## OAuth1
 
-For OAuth1 authentication the `OAuth1Authenticator` class provides static methods to help generate an OAuth authenticator.
+For OAuth1 authentication the `OAuth1Auth` class provides static methods to help generate an OAuth authenticator.
 
 ### Request token
 
@@ -43,7 +43,7 @@ This method requires a `consumerKey` and `consumerSecret` to authenticate.
 
 ```csharp
 var options = new RestClientOptions("https://example.com") {
-    Authenticator = OAuth1Authenticator.ForRequestToken(consumerKey, consumerSecret)
+    Authenticator = OAuth1Auth.ForRequestToken(consumerKey, consumerSecret)
 };
 var client = new RestClient(options);
 ```
@@ -53,7 +53,7 @@ var client = new RestClient(options);
 This method retrieves an access token when provided `consumerKey`, `consumerSecret`, `oauthToken`, and `oauthTokenSecret`.
 
 ```csharp
-var authenticator = OAuth1Authenticator.ForAccessToken(
+var authenticator = OAuth1Auth.ForAccessToken(
     consumerKey, consumerSecret, oauthToken, oauthTokenSecret
 );
 var options = new RestClientOptions("https://example.com") {
@@ -64,7 +64,7 @@ var client = new RestClient(options);
 
 This method also includes an optional parameter to specify the `OAuthSignatureMethod`.
 ```csharp
-var authenticator = OAuth1Authenticator.ForAccessToken(
+var authenticator = OAuth1Auth.ForAccessToken(
     consumerKey, consumerSecret, oauthToken, oauthTokenSecret, 
     OAuthSignatureMethod.PlainText
 );
@@ -75,7 +75,7 @@ var authenticator = OAuth1Authenticator.ForAccessToken(
 The same access token authenticator can be used in 0-legged OAuth scenarios by providing `null` for the `consumerSecret`.
 
 ```csharp
-var authenticator = OAuth1Authenticator.ForAccessToken(
+var authenticator = OAuth1Auth.ForAccessToken(
     consumerKey, null, oauthToken, oauthTokenSecret
 );
 ```
